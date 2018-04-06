@@ -1,0 +1,11 @@
+#explorateur{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	min-width: 500px;
+	min-height: 400px;
+}
+section#explorateur article{
+	display: flex;
+	justify-content: space-between;
+}
