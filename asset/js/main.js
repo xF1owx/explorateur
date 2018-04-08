@@ -70,8 +70,5 @@ function resetExplorateur(){
 	document.querySelectorAll('article.resultatExplorateur').forEach(article => fileExploElt.removeChild(article));
 	
 }
-function ouvrirFichier(fichier){
-
-}
 
 requeteAjax('./');

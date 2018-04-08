@@ -1,52 +1,53 @@
 
-fileExploElt.addEventListener('click', function(event){
-				// console.log(event.target.textContent);
-				// console.log(event.target.parentNode.firstElementChild.textContent);
-					resetExplorateur();
-					let pathChoose = event.target.parentNode.firstElementChild.textContent;
-					let req = "";
-					let constructPath;
-					if ((pathChoose.split(".").includes("html")) || (pathChoose.split(".").includes("php"))){
-						if (pointeurDir.length){
-								constructPath = pointeurDir.reduce( (a, b)=>  a + "/" + b);
-								constructPath = "/" + constructPath;
-						} else {
-							constructPath = "";
-						}
-						pointeurDir = [];
-						window.location = constructPath + "/" + pathChoose;
+fileExploElt.addEventListener('dblclick', function(event){
+		if (event.target.parentNode.firstElementChild.classList.contains("resultatNom")){
+			resetExplorateur();
+			let pathChoose = event.target.parentNode.firstElementChild.textContent;
+			let req = "";
+			let constructPath;
+			if ((pathChoose.split(".").includes("html")) || (pathChoose.split(".").includes("php"))){
+				if (pointeurDir.length){
+						constructPath = pointeurDir.reduce( (a, b)=>  a + "/" + b);
+						constructPath = "/" + constructPath;
+				} else {
+					constructPath = "";
+				}
+				pointeurDir = [];
+				window.location = constructPath + "/" + pathChoose;
 
-					}
-					if (pathChoose == ".."){
-						if (pointeurDir.length){
-							pointeurDir.pop(pathChoose);
-							if (pointeurDir.length){
-								constructPath = pointeurDir.reduce( (a, b)=>  a + "/" + b);
-								req = constructPath;
-							} else {
-								req = "..";
-							}
-							
-							// req = pointeurDir[pointeurDir.length-1];
-							
-						} else {
-							req = "..";
-						}
+			}
+			if (pathChoose == ".."){
+				if (pointeurDir.length){
+					pointeurDir.pop(pathChoose);
+					if (pointeurDir.length){
+						constructPath = pointeurDir.reduce( (a, b)=>  a + "/" + b);
+						req = constructPath;
 					} else {
-						if (pointeurDir.length){
-							constructPath = pointeurDir.reduce( (a, b)=>  a + "/" + b);
-							req = constructPath + "/" + pathChoose;
-							// req = pointeurDir[pointeurDir.length-1] + '/' + pathChoose;
-						} else {
-							req = pathChoose;
-						}
-						pointeurDir.push(pathChoose);
+						req = "..";
 					}
-					console.log(req);
-					console.log(pointeurDir);
-					requeteAjax(req);
+					
+					// req = pointeurDir[pointeurDir.length-1];
+					
+				} else {
+					req = "..";
+				}
+			} else {
+				if (pointeurDir.length){
+					constructPath = pointeurDir.reduce( (a, b)=>  a + "/" + b);
+					req = constructPath + "/" + pathChoose;
+					// req = pointeurDir[pointeurDir.length-1] + '/' + pathChoose;
+				} else {
+					req = pathChoose;
+				}
+				pointeurDir.push(pathChoose);
+			}
+			console.log(req);
+			console.log(pointeurDir);
+			requeteAjax(req);
+		}
+		
 
-				
-				// event.stopPropagation();
-				event.preventDefault();
+	
+	// event.stopPropagation();
+	event.preventDefault();
 			});
