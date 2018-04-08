@@ -1,3 +1,5 @@
+// requête AJAX générée par fetch()
+// envoi du nouveau chemin au serveur par $_GET['chemin']
 function requeteAjax(chemin){
   if (!chemin) chemin = "";
   let pathToExplore = 'traitement.php';

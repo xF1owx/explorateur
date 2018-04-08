@@ -1,10 +1,15 @@
-
+//  eventManager.js se charge de toute la gestion d'événnement de l'explorateur de fichier
+// Evennement sur double clic
 fileExploElt.addEventListener('dblclick', function(event){
+	// teste si le premier enfant de la cible est bien un .resultatNom
 		if (event.target.parentNode.firstElementChild.classList.contains("resultatNom")){
 			resetExplorateur();
+			// on récupère le chemin choisit
 			let pathChoose = event.target.parentNode.firstElementChild.textContent;
+			// initialise req et constructPath
 			let req = "";
 			let constructPath;
+			// si c'est un fichier html ou php on l'ouvre via Js
 			if ((pathChoose.split(".").includes("html")) || (pathChoose.split(".").includes("php"))){
 				if (pointeurDir.length){
 						constructPath = pointeurDir.reduce( (a, b)=>  a + "/" + b);
@@ -14,8 +19,8 @@ fileExploElt.addEventListener('dblclick', function(event){
 				}
 				pointeurDir = [];
 				window.location = constructPath + "/" + pathChoose;
-
 			}
+			// si c'est le lien parent, remarquez le pop sur pointeurDir
 			if (pathChoose == ".."){
 				if (pointeurDir.length){
 					pointeurDir.pop(pathChoose);
@@ -24,30 +29,26 @@ fileExploElt.addEventListener('dblclick', function(event){
 						req = constructPath;
 					} else {
 						req = "..";
-					}
-					
-					// req = pointeurDir[pointeurDir.length-1];
-					
+					}					
 				} else {
 					req = "..";
 				}
+			// si c'est un dossier du dossier courant
 			} else {
 				if (pointeurDir.length){
 					constructPath = pointeurDir.reduce( (a, b)=>  a + "/" + b);
 					req = constructPath + "/" + pathChoose;
-					// req = pointeurDir[pointeurDir.length-1] + '/' + pathChoose;
 				} else {
 					req = pathChoose;
 				}
+				// push sur pointeurDir
 				pointeurDir.push(pathChoose);
 			}
 			console.log(req);
 			console.log(pointeurDir);
+			// on renvoie une requête AJAX avec un chemin pré-calculé dans req
 			requeteAjax(req);
-		}
-		
-
-	
+		}			
 	// event.stopPropagation();
 	event.preventDefault();
-			});
+});
