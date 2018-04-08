@@ -1,6 +1,5 @@
 function requeteAjax(chemin){
   if (!chemin) chemin = "";
-  if (chemin.includes(".")) ouvrirFichier(chemin);
   let pathToExplore = 'traitement.php';
   if ((chemin != "") && (!chemin.includes("."))){
     pathToExplore += "?chemin=/"+chemin+"/";
