@@ -3,8 +3,9 @@ function requeteAjax(chemin){
   if (chemin.includes(".")) ouvrirFichier(chemin);
   let pathToExplore = 'traitement.php';
   if ((chemin != "") && (!chemin.includes("."))){
-    pathToExplore += "?chemin="+chemin;
+    pathToExplore += "?chemin=/"+chemin+"/";
   }
+  console.log(pathToExplore);
   var ajaxData = [];
 
   fetch(pathToExplore)

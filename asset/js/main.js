@@ -1,5 +1,5 @@
 let fileExploElt = document.querySelector('#explorateur');
-
+let pointeurDir = [];
 function FileConvertSize(aSize){
 	if (aSize > 0){
 		aSize = Math.abs(parseInt(aSize, 10));
@@ -10,8 +10,8 @@ function FileConvertSize(aSize){
 	}	
 }
 
-function traitementValeur({nom, type, lastChange, lastView, taille}){
-	if ((nom == ".") && (type == "directory")) traitementDossierCourant(nom, taille);
+function traitementValeur({currentDirectory, nom, type, lastChange, lastView, taille}){
+	if ((nom == ".") && (type == "directory")) traitementDossierCourant(currentDirectory, nom, taille);
 	if (nom == "..") traitementParent(nom);
 		if (type != "directory"){
 			traitementFichier({nom, type, lastChange, lastView, taille});
@@ -28,15 +28,23 @@ function eltDom(type, name, className){
 	noeud.textContent = name;
 	return noeud;
 }
-function traitementDossierCourant(nom, taille){
+function traitementDossierCourant(currentDirectory, nom, taille){
 	let nomDossierElt = document.querySelector('div.nomDossierCourant');
 	let tailleDossierElt = document.querySelector('div.tailleCourant');
-	nomDossierElt.appendChild(eltDom('h3', nom, 'titreHeaderExplorateur'));
-	tailleDossierElt.appendChild(eltDom('p', taille, 'tailleHeaderExplorateur'));
-	console.log('coucou');
+	// let nomSplit = currentDirectory.split("\\");
+	// nomSplit = nomSplit[nomSplit.length - 1];
+	nomDossierElt.appendChild(eltDom('h3', currentDirectory, 'titreHeaderExplorateur'));
+	tailleDossierElt.appendChild(eltDom('p', FileConvertSize(taille), 'tailleHeaderExplorateur'));
+	
 }
 function traitementParent(nom){
-
+	let articleResultatElt = eltDom('article', "", 'resultatExplorateur');
+	articleResultatElt.appendChild(eltDom('p', nom, 'resultatNom'));
+	articleResultatElt.appendChild(eltDom('p', "", 'resultatType'));
+	articleResultatElt.appendChild(eltDom('p', "", 'resultatDerniereModif'));
+	articleResultatElt.appendChild(eltDom('p', "", 'resultatDernierVue'));
+	articleResultatElt.appendChild(eltDom('p', "", 'resultatTaille'));
+	return fileExploElt.appendChild(articleResultatElt);
 }
 function traitementFichier({nom, type, lastChange, lastView, taille}){
 	let articleResultatElt = eltDom('article', "", 'resultatExplorateur');

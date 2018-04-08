@@ -1,12 +1,16 @@
 <?php
 function retour(){
+	
+	// var_dump($path);
 	// test $_GET pour changement de dossier
 	if ((isset($_GET['chemin'])) && (!empty($_GET['chemin']))){
-		$d = dir($_GET['chemin']);
+		
+		$d = dir($_SERVER['DOCUMENT_ROOT'].$_GET['chemin']);
+		chdir($_SERVER['DOCUMENT_ROOT'].$_GET['chemin']);
 	} else {
-		$d = dir(".");
+		$d = dir($_SERVER['DOCUMENT_ROOT']);
+		chdir($_SERVER['DOCUMENT_ROOT']);
 	}
-	
 
 	$traitement = array();
 	while (false !== ($entry = $d->read())) {
@@ -18,7 +22,8 @@ function retour(){
 		} else {
 			$taille = filesize($entry);
 		}
-	   	$traitement[] = array( 	"nom" => $entry,
+	   	$traitement[] = array( 	"currentDirectory" => 						getcwd(),
+	   							"nom" => $entry,
 	   							"type" => mime_content_type($entry),
 	   							"lastChange" => date ("d-Y H:i:s.", filemtime($entry)),
 	   							"lastView" => date ("d-Y H:i:s.", filectime($entry)),
