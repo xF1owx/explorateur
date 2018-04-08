@@ -9,3 +9,24 @@ section#explorateur article{
 	display: flex;
 	justify-content: space-between;
 }
+/* bloc résultat*/
+article.resultatExplorateur:hover{
+	color: red;
+	cursor: pointer;
+}
+article.resultatExplorateur:active{
+	background-color: blue;
+}
+article.resultatExplorateur>p{
+	width: 20%;
+	text-align: center;
+}
+article.categoriesColonnes>div{
+	width: 20%;
+	display: flex;
+	justify-content: center;
+}
+.resultatNom{
+	font-size: 1.1em;
+	font-weight: 700;
+}
