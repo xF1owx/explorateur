@@ -2,10 +2,15 @@
 // Evennement sur double clic
 fileExploElt.addEventListener('dblclick', function(event){
 	// teste si le premier enfant de la cible est bien un .resultatNom
-		if (event.target.parentNode.firstElementChild.classList.contains("resultatNom")){
+		let eventTarget = event.target;
+		if (eventTarget.tagName == 'IMG'){
+			console.log('coucou');
+			eventTarget = event.target.parentNode;
+		}
+		if (eventTarget.parentNode.firstElementChild.classList.contains("resultatNom")){
 			resetExplorateur();
 			// on récupère le chemin choisit
-			let pathChoose = event.target.parentNode.firstElementChild.textContent;
+			let pathChoose = eventTarget.parentNode.firstElementChild.textContent;
 			// initialise req et constructPath
 			let req = "";
 			let constructPath;
