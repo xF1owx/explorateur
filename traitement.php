@@ -33,8 +33,8 @@ function retour(){
 	   	$traitement[] = array( 	"currentDirectory" => 						getcwd(),
 	   							"nom" => $entry,
 	   							"type" => mime_content_type($entry),
-	   							"lastChange" => date ("d-Y H:i:s.", filemtime($entry)),
-	   							"lastView" => date ("d-Y H:i:s.", fileatime($entry)),
+	   							"lastChange" => date ("d-m-Y H:i:s.", filemtime($entry)),
+	   							"lastView" => date ("d-m-Y H:i:s.", fileatime($entry)),
 	   							"taille" => $taille
 	   						);
 	}
