@@ -38,7 +38,12 @@ function retour(){
 	   							"taille" => $taille
 	   						);
 	}
-	array_multisort (array_column($traitement, 'type'), SORT_ASC, $traitement);
+	if ((isset($_GET['tri'])) && ($_GET['tri'] == 'typeTrue')){
+		array_multisort (array_column($traitement, 'type'), SORT_ASC, $traitement);
+	} elseif ((isset($_GET['tri'])) && ($_GET['tri'] == 'typeFalse')) {
+		array_multisort (array_column($traitement, 'type'), SORT_DESC, $traitement);
+	}
+	
 	// transforme le tableau de tableau $traitement en tableau d'objets au format JSON 
 	$traitement = json_encode($traitement);
 	// ferme l'instance de directory

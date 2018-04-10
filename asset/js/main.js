@@ -10,6 +10,7 @@
 // cela nous permettera de trouver les bon chemins dans l'explorateur
 let fileExploElt = document.querySelector('#explorateur');
 let pointeurDir = [];
+let triType = false;
 // fonction d'aide pour convertir les tailles en chiffres humain
 function FileConvertSize(aSize){
 	if (aSize > 0){

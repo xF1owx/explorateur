@@ -63,12 +63,26 @@ fileExploElt.addEventListener('click', function(event){
 	if (eltTarget.tagName == 'DIV'){
 		if (eltTarget.parentNode.classList.contains("categoriesColonnes")){
 			let classeCible = eltTarget.classList;
+			if (pointeurDir.length){
+					constructPath = pointeurDir.reduce( (a, b)=>  a + "/" + b);
+					req = constructPath;
+				} else {
+					req = "..";
+				}
 			console.log(`classe div = ${classeCible}`);
 			if (classeCible.contains("colonneNom")){
 				console.log('colonneNom');
 			}
 			if (classeCible.contains("colonneType")){
 				console.log('colonneType');
+				resetExplorateur();
+				if (!triType){
+					triType = true;
+					requeteAjax(req, "tri=typeTrue");
+				} else {
+					triType = false;
+					requeteAjax(req, "tri=typeFalse");
+				}
 			}
 			if (classeCible.contains("colonneLastModif")){
 				console.log('colonneLastModif');
