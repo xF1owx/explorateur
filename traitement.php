@@ -38,6 +38,7 @@ function retour(){
 	   							"taille" => $taille
 	   						);
 	}
+	array_multisort (array_column($traitement, 'type'), SORT_ASC, $traitement);
 	// transforme le tableau de tableau $traitement en tableau d'objets au format JSON 
 	$traitement = json_encode($traitement);
 	// ferme l'instance de directory
