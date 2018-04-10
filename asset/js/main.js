@@ -11,6 +11,10 @@
 let fileExploElt = document.querySelector('#explorateur');
 let pointeurDir = [];
 let triType = false;
+let triNom = false;
+let triTaille = false;
+let triLastModif = false;
+let triLastView = false;
 // fonction d'aide pour convertir les tailles en chiffres humain
 function FileConvertSize(aSize){
 	if (aSize > 0){

@@ -33,8 +33,8 @@ function retour(){
 	   	$traitement[] = array( 	"currentDirectory" => 						getcwd(),
 	   							"nom" => $entry,
 	   							"type" => mime_content_type($entry),
-	   							"lastChange" => date ("d-m-Y H:i:s.", filemtime($entry)),
-	   							"lastView" => date ("d-m-Y H:i:s.", fileatime($entry)),
+	   							"lastChange" => filemtime($entry),
+	   							"lastView" => fileatime($entry),
 	   							"taille" => $taille
 	   						);
 	}
@@ -43,7 +43,31 @@ function retour(){
 	} elseif ((isset($_GET['tri'])) && ($_GET['tri'] == 'typeFalse')) {
 		array_multisort (array_column($traitement, 'type'), SORT_DESC, $traitement);
 	}
-	
+	if ((isset($_GET['tri'])) && ($_GET['tri'] == 'nomTrue')){
+		array_multisort (array_column($traitement, 'nom'), SORT_ASC, $traitement);
+	} elseif ((isset($_GET['tri'])) && ($_GET['tri'] == 'nomFalse')) {
+		array_multisort (array_column($traitement, 'nom'), SORT_DESC, $traitement);
+	}
+	if ((isset($_GET['tri'])) && ($_GET['tri'] == 'tailleTrue')){
+		array_multisort (array_column($traitement, 'taille'), SORT_ASC, $traitement);
+	} elseif ((isset($_GET['tri'])) && ($_GET['tri'] == 'tailleFalse')) {
+		array_multisort (array_column($traitement, 'taille'), SORT_DESC, $traitement);
+	}
+	if ((isset($_GET['tri'])) && ($_GET['tri'] == 'lastModifTrue')){
+		array_multisort (array_column($traitement, 'lastChange'), SORT_ASC, $traitement);
+	} elseif ((isset($_GET['tri'])) && ($_GET['tri'] == 'lastModifFalse')) {
+		array_multisort (array_column($traitement, 'lastChange'), SORT_DESC, $traitement);
+	}
+	if ((isset($_GET['tri'])) && ($_GET['tri'] == 'lastViewTrue')){
+		array_multisort (array_column($traitement, 'lastView'), SORT_ASC, $traitement);
+	} elseif ((isset($_GET['tri'])) && ($_GET['tri'] == 'lastViewFalse')) {
+		array_multisort (array_column($traitement, 'lastView'), SORT_DESC, $traitement);
+	}
+	$array_length = count($traitement);
+	for ($i=0; $i < $array_length; $i++) { 
+		$traitement[$i]["lastChange"] = date("d-m-Y H:i:s.", $traitement[$i]["lastChange"]);
+		$traitement[$i]["lastView"] = date("d-m-Y H:i:s.", $traitement[$i]["lastView"]);
+	}
 	// transforme le tableau de tableau $traitement en tableau d'objets au format JSON 
 	$traitement = json_encode($traitement);
 	// ferme l'instance de directory

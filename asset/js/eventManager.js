@@ -79,6 +79,14 @@ fileExploElt.addEventListener('click', function(event){
 			console.log(`classe div = ${classeCible}`);
 			if (classeCible.contains("colonneNom")){
 				console.log('colonneNom');
+				resetExplorateur();
+				if (!triNom){
+					triNom = true;
+					requeteAjax(req, "tri=nomTrue");
+				} else {
+					triNom = false;
+					requeteAjax(req, "tri=nomFalse");
+				}
 			}
 			if (classeCible.contains("colonneType")){
 				console.log('colonneType');
@@ -93,12 +101,36 @@ fileExploElt.addEventListener('click', function(event){
 			}
 			if (classeCible.contains("colonneLastModif")){
 				console.log('colonneLastModif');
+				resetExplorateur();
+				if (!triLastModif){
+					triLastModif = true;
+					requeteAjax(req, "tri=lastModifTrue");
+				} else {
+					triLastModif = false;
+					requeteAjax(req, "tri=lastModifFalse");
+				}
 			}
 			if (classeCible.contains("colonneLastView")){
 				console.log('colonneLastView');
+				resetExplorateur();
+				if (!triLastView){
+					triLastView = true;
+					requeteAjax(req, "tri=lastViewTrue");
+				} else {
+					triLastView = false;
+					requeteAjax(req, "tri=lastViewFalse");
+				}
 			}
 			if (classeCible.contains("colonneTaille")){
 				console.log('colonneTaille');
+				resetExplorateur();
+				if (!triTaille){
+					triTaille = true;
+					requeteAjax(req, "tri=tailleTrue");
+				} else {
+					triTaille = false;
+					requeteAjax(req, "tri=tailleFalse");
+				}
 			}
 			
 		}
