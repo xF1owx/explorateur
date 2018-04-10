@@ -36,6 +36,12 @@ function imageByType(type){
 		return iconeElt;
 	}
 }
+function backButtonFirst(){
+	let returnRowElt = document.querySelector('p.dossierPrecedent').parentNode;
+	fileExploElt.removeChild(returnRowElt);
+	let barreTitresElt = document.querySelector('article.categoriesColonnes');
+	fileExploElt.insertBefore(returnRowElt, barreTitresElt.nextSibling);
+}
 // function unknownFile(){
 // 	let iconeElt = document.createElement('img');
 // 	iconeElt.src = "asset/img/svg/unknown-document.svg";
@@ -75,8 +81,8 @@ function traitementDossierCourant(currentDirectory, nom, taille){
 // affiche le lien pour remonter au dossier parent
 function traitementParent(nom){
 	let articleResultatElt = eltDom('article', "", 'resultatExplorateur');
-	articleResultatElt.appendChild(eltDom('p', nom, 'resultatNom'));
-	articleResultatElt.appendChild(eltDom('p', "", 'resultatType'));
+	articleResultatElt.appendChild(eltDom('p', nom, 'resultatNom dossierPrecedent'));
+	articleResultatElt.appendChild(eltDom('p', "", 'resultatType')).appendChild(imageByType("directory.back"));
 	articleResultatElt.appendChild(eltDom('p', "", 'resultatDerniereModif'));
 	articleResultatElt.appendChild(eltDom('p', "", 'resultatDernierVue'));
 	articleResultatElt.appendChild(eltDom('p', "", 'resultatTaille'));

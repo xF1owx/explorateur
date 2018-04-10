@@ -29,6 +29,7 @@ function requeteAjax(chemin, tri = ""){
     for ( let valeur of ajaxData){
       traitementValeur(valeur);
     }
+    backButtonFirst();
   });
 }
 
