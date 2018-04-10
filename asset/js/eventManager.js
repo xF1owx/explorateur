@@ -35,14 +35,16 @@ fileExploElt.addEventListener('dblclick', function(event){
 				}
 			// si c'est un dossier du dossier courant
 			} else {
-				if (pointeurDir.length){
-					constructPath = pointeurDir.reduce( (a, b)=>  a + "/" + b);
-					req = constructPath + "/" + pathChoose;
-				} else {
-					req = pathChoose;
+				if (!pathChoose.includes('.')){
+					if (pointeurDir.length){
+						constructPath = pointeurDir.reduce( (a, b)=>  a + "/" + b);
+						req = constructPath + "/" + pathChoose;
+					} else {
+						req = pathChoose;
+					}
+					// push sur pointeurDir
+					pointeurDir.push(pathChoose);
 				}
-				// push sur pointeurDir
-				pointeurDir.push(pathChoose);
 			}
 			console.log(req);
 			console.log(pointeurDir);
