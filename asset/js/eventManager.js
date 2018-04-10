@@ -52,3 +52,34 @@ fileExploElt.addEventListener('dblclick', function(event){
 	// event.stopPropagation();
 	event.preventDefault();
 });
+fileExploElt.addEventListener('click', function(event){
+	let eltTarget = event.target;
+	let eltTargetTag = event.target.tagName;
+	console.log(event.target.tagName);
+	if (eltTargetTag == 'H5'){
+		eltTarget = eltTarget.parentNode;
+		console.log(eltTarget);
+	}
+	if (eltTarget.tagName == 'DIV'){
+		if (eltTarget.parentNode.classList.contains("categoriesColonnes")){
+			let classeCible = eltTarget.classList;
+			console.log(`classe div = ${classeCible}`);
+			if (classeCible.contains("colonneNom")){
+				console.log('colonneNom');
+			}
+			if (classeCible.contains("colonneType")){
+				console.log('colonneType');
+			}
+			if (classeCible.contains("colonneLastModif")){
+				console.log('colonneLastModif');
+			}
+			if (classeCible.contains("colonneLastView")){
+				console.log('colonneLastView');
+			}
+			if (classeCible.contains("colonneTaille")){
+				console.log('colonneTaille');
+			}
+			
+		}
+	}
+});

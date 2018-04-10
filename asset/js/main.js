@@ -20,6 +20,26 @@ function FileConvertSize(aSize){
 		}	
 	}	
 }
+function imageByType(type){
+	let iconeElt = document.createElement('img');
+	iconeElt.className = "iconeExplorateur";
+	if (type == "directory") {
+		// let iconeElt = document.createElement('img');
+		iconeElt.src = "asset/img/svg/folder-3.svg";
+		return iconeElt;
+	}
+	if (type.includes(".")){
+		let fileExtension = type.split(".");
+		fileExtension = fileExtension[fileExtension.length - 1];
+		iconeElt.src = "asset/img/svg/" + fileExtension + ".svg";
+		return iconeElt;
+	}
+}
+// function unknownFile(){
+// 	let iconeElt = document.createElement('img');
+// 	iconeElt.src = "asset/img/svg/unknown-document.svg";
+// 	return iconeElt;
+// }
 // traitementValeur est la fonction qui dispatch les contenus du dossier courant pour l'affichage
 // 4 aiguillages possibles : dossier courant, dossier parent, dossiers et fichiers contenus dans le dossier exploré
 function traitementValeur({currentDirectory, nom, type, lastChange, lastView, taille}){
@@ -64,8 +84,8 @@ function traitementParent(nom){
 // affichage des fichiers contenus dans le dossier courant
 function traitementFichier({nom, type, lastChange, lastView, taille}){
 	let articleResultatElt = eltDom('article', "", 'resultatExplorateur');
-	articleResultatElt.appendChild(eltDom('p', nom, 'resultatNom'));
-	articleResultatElt.appendChild(eltDom('p', type, 'resultatType'));
+	articleResultatElt.appendChild(eltDom('p', nom, 'resultatNom'));		
+	articleResultatElt.appendChild(eltDom('p', "", 'resultatType')).appendChild(imageByType(nom));	
 	articleResultatElt.appendChild(eltDom('p', lastChange, 'resultatDerniereModif'));
 	articleResultatElt.appendChild(eltDom('p', lastView, 'resultatDernierVue'));
 	articleResultatElt.appendChild(eltDom('p', FileConvertSize(taille), 'resultatTaille'));
@@ -75,7 +95,7 @@ function traitementFichier({nom, type, lastChange, lastView, taille}){
 function traitementDossier({nom, type, lastChange, lastView, taille}){
 	let articleResultatElt = eltDom('article', "", 'resultatExplorateur');
 	articleResultatElt.appendChild(eltDom('p', nom, 'resultatNom'));
-	articleResultatElt.appendChild(eltDom('p', type, 'resultatType'));
+	articleResultatElt.appendChild(eltDom('p', "", 'resultatType')).appendChild(imageByType(type));
 	articleResultatElt.appendChild(eltDom('p', lastChange, 'resultatDerniereModif'));
 	articleResultatElt.appendChild(eltDom('p', lastView, 'resultatDernierVue'));
 	articleResultatElt.appendChild(eltDom('p', "", 'resultatTaille'));
