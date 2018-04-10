@@ -1,18 +1,9 @@
-var ajaxData = [];
-
-fetch('traitement.php')
-.then(function(response) {
+fetch('traitement.php').then(function(response){ //**je récupère ma liste encodée en json **//
   return response.json();
-})
-.then(function(data) {
-	// data = JSON.parse(data);
-  data.forEach(function(a){
-  	ajaxData.push(a);
-  });
-  console.log('taille dans fetch : ' + ajaxData.length);
-  for ( let valeur of ajaxData){
-  	traitementValeur(valeur);
-	}
+  }).then (function (tableau){
+  for (element in tableau){
+  document.getElementById("container").innerHTML += ' ' +'<div class="folder"> <a href="">' +tableau[element]+ '</a>' +' </div> </br>';
+  }
   
- 
-});
+  
+  }) 
