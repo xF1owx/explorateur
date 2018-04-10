@@ -34,7 +34,7 @@ function retour(){
 	   							"nom" => $entry,
 	   							"type" => mime_content_type($entry),
 	   							"lastChange" => date ("d-Y H:i:s.", filemtime($entry)),
-	   							"lastView" => date ("d-Y H:i:s.", filectime($entry)),
+	   							"lastView" => date ("d-Y H:i:s.", fileatime($entry)),
 	   							"taille" => $taille
 	   						);
 	}
